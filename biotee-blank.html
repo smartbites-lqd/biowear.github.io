@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biotee-Blank</title>
+  <link rel="icon" type="image/png" href="logo-biowear.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+   <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        
+        html {
+            height: 100%;
+        }
+
+        .image-container {
+            aspect-ratio: 14/18;
+            position: relative;
+        }
+
+        .product-badge {
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .thumbnail-btn.active {
+            border-width: 3px;
+            transform: scale(1.05);
+        }
+
+        .color-btn.active {
+            border-width: 4px;
+            transform: scale(1.1);
+        }
+
+        .size-btn.active {
+            border-width: 3px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            to {
+                left: 200%;
+            }
+        }
+        .color-swatch {
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .color-swatch:hover {
+          transform: scale(1.1);
+          box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+
+        .color-swatch.selected {
+          border-color: #3b82f6 !important; /* blue-500 */
+          box-shadow: 0 0 10px rgba(59,130,246,0.5);
+        }
+
+    </style>
+</head>
+<body>
+  <nav class="bg-white border-gray-200 py-4 shadow-sm dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
+
+        <!-- LOGO + Tên thương hiệu -->
+        <a href="#" class="flex items-center space-x-3">
+            <img src="logo-biowear.jpg" class="h-10 sm:h-12" alt="Biowear Logo">
+            <span class="self-center text-2xl font-bold whitespace-nowrap dark:text-white">
+                Biowear
+            </span>
+        </a>
+
+        <!-- Nút yêu cầu mẫu & Menu mobile -->
+        <div class="flex items-center lg:order-2">
+            <a href="yeu-cau-mau.html"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
+                       font-semibold rounded-lg text-base px-6 py-3 mr-2 dark:bg-blue-600 
+                       dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Yêu cầu mẫu
+            </a>
+
+            <button data-collapse-toggle="mobile-menu-2" type="button"
+                class="inline-flex items-center p-3 ml-1 text-gray-600 rounded-lg lg:hidden hover:bg-gray-100 
+                       focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 
+                       dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="mobile-menu-2" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- MENU ITEMS -->
+        <div class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1 hidden" id="mobile-menu-2">
+            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-10 lg:mt-0 text-lg">
+
+                <li>
+                    <a href="index.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="product.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Sản phẩm
+                    </a>
+                </li>
+
+                <li>
+                    <a href="khuyen-mai.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Khuyến mãi
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--Sharing is Caring-->
+  <div class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-full p-4 md:p-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div class="grid md:grid-cols-2 gap-0">
+        <!-- Phần Hình ảnh Sản phẩm -->
+        <div class="p-6 md:p-10 bg-gradient-to-br from-slate-50 to-slate-100">
+          <div class="image-container bg-white rounded-2xl shadow-xl overflow-hidden border-4 border-white shine-effect relative">
+            <img
+              id="mainImage"
+              src="Biotee-Blank/1.png"
+              alt="Product Image"
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+              onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';"
+            >
+            <!-- ĐÃ BỎ BADGE 'Combo 3 cái' -->
+          </div>
+
+          <!-- ĐÃ BỎ 3 ẢNH THUMBNAIL Ở DƯỚI -->
+        </div>
+
+        <!-- Phần Thông tin Sản phẩm -->
+        <div class="p-6 md:p-10 flex flex-col justify-center space-y-8">
+          <!-- Tiêu đề -->
+          <div class="space-y-4 fade-in-up">
+            <h1 id="productTitle" class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              Blank
+            </h1>
+
+            <!-- ĐÃ BỎ PHẦN ĐÁNH GIÁ (SAO + 128 ĐÁNH GIÁ) -->
+          </div>
+
+          <!-- Giá (GIỮ LẠI GIÁ CHÍNH, BỎ GIẢM GIÁ) -->
+          <div class="flex items-baseline gap-4 fade-in-up">
+            <span class="text-5xl font-bold gradient-text">300.000₫</span>
+            <!-- ĐÃ BỎ GIÁ GẠCH & % GIẢM GIÁ -->
+          </div>
+
+          <!-- Chọn màu sắc -->
+          <!-- Chọn màu sắc -->
+<div class="space-y-4 fade-in-up">
+  <h3 class="text-xl font-bold text-gray-900">Chọn màu sắc:</h3>
+
+  <div class="flex gap-2 mb-4">
+    <div class="color-swatch selected w-10 h-10 rounded-xl cursor-pointer border-2 border-blue-500"
+         style="background-color: #50977f;"
+         data-image="Biotee-Blank/1.png"></div>
+
+    <div class="color-swatch w-10 h-10 rounded-xl cursor-pointer border-2 border-gray-300"
+         style="background-color: #4f4f4f;"
+         data-image="Biotee-Blank/2.png"></div>
+
+    <div class="color-swatch w-10 h-10 rounded-xl cursor-pointer border-2 border-gray-300"
+         style="background-color: #3e5276;"
+         data-image="Biotee-Blank/3.png"></div>
+
+    <div class="color-swatch w-10 h-10 rounded-xl cursor-pointer border-2 border-gray-300"
+         style="background-color: #958979;"
+         data-image="Biotee-Blank/4.png"></div>
+  </div>
+</div>
+
+
+          <!-- Chọn kích thước -->
+          <div class="space-y-4 fade-in-up">
+            <h3 id="sizeSectionTitle" class="text-xl font-bold text-gray-900">Chọn kích thước:</h3>
+            <div class="flex gap-3">
+              <button class="size-btn px-8 py-3.5 rounded-xl border-2 border-gray-200 font-semibold text-gray-700 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300" onclick="selectSize(this)">M</button>
+              <button class="size-btn active px-8 py-3.5 rounded-xl border-blue-500 bg-blue-50 font-bold text-blue-700 shadow-md" onclick="selectSize(this)">L</button>
+              <button class="size-btn px-8 py-3.5 rounded-xl border-2 border-gray-200 font-semibold text-gray-700 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300" onclick="selectSize(this)">XL</button>
+              <button class="size-btn px-8 py-3.5 rounded-xl border-2 border-gray-200 font-semibold text-gray-700 hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700 transition-all duration-300" onclick="selectSize(this)">XXL</button>
+            </div>
+          </div>
+
+          <!-- Nút hành động -->
+          <!-- Nút hành động -->
+          <div class="flex gap-4 pt-4 fade-in-up">
+            <button
+              id="buyButton"
+              class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 px-8 rounded-xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl">
+              🛒 Mua hàng
+            </button>
+            <!-- ĐÃ BỎ NÚT TIM ❤️ -->
+          </div>
+          <p id="orderMessage"
+            class="mt-3 text-green-600 font-semibold hidden">
+            <!-- Thông báo sẽ được JS thêm vào đây -->
+          </p>
+
+
+          <!-- Thông tin vận chuyển -->
+          <div class="space-y-3 pt-4 border-t border-gray-200 fade-in-up">
+            <div class="flex items-center gap-3 text-gray-700">
+              <span class="text-2xl">🚚</span>
+              <span class="font-medium">Miễn phí vận chuyển cho đơn trên 200.000₫</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-700">
+              <span class="text-2xl">✅</span>
+              <span class="font-medium">Đổi trả trong vòng 7 ngày</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-700">
+              <span class="text-2xl">🎁</span>
+              <span class="font-medium">Tặng kèm quà tặng đặc biệt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const defaultConfig = {
+    product_title: "Blank",
+    /* ĐÃ BỎ product_badge */
+    color_section_title: "Chọn màu sắc:",
+    size_section_title: "Chọn kích thước:",
+    background_color: "#f8fafc",
+    primary_color: "#667eea",
+    text_color: "#1f2937",
+    accent_color: "#764ba2",
+    button_color: "#3b82f6"
+  };
+
+  let config = { ...defaultConfig };
+
+  
+  function selectSize(button) {
+    document.querySelectorAll('.size-btn').forEach(btn => {
+      btn.classList.remove('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700', 'font-bold', 'shadow-md');
+      btn.classList.add('border-2', 'border-gray-200', 'text-gray-700', 'font-semibold');
+    });
+
+    button.classList.add('active', 'border-blue-500', 'bg-blue-50', 'text-blue-700', 'font-bold', 'shadow-md');
+    button.classList.remove('border-2', 'border-gray-200', 'font-semibold');
+  }
+
+  async function onConfigChange(newConfig) {
+    const productTitle = document.getElementById('productTitle');
+    const colorSectionTitle = document.getElementById('colorSectionTitle');
+    const sizeSectionTitle = document.getElementById('sizeSectionTitle');
+
+    if (productTitle) {
+      productTitle.textContent = newConfig.product_title || defaultConfig.product_title;
+    }
+    if (colorSectionTitle) {
+      colorSectionTitle.textContent = newConfig.color_section_title || defaultConfig.color_section_title;
+    }
+    if (sizeSectionTitle) {
+      sizeSectionTitle.textContent = newConfig.size_section_title || defaultConfig.size_section_title;
+    }
+
+    document.body.style.backgroundColor = newConfig.background_color || defaultConfig.background_color;
+  }
+
+  function mapToCapabilities(config) {
+    return {
+      recolorables: [
+        {
+          get: () => config.background_color || defaultConfig.background_color,
+          set: (value) => {
+            config.background_color = value;
+            window.elementSdk.setConfig({ background_color: value });
+          }
+        },
+        {
+          get: () => config.primary_color || defaultConfig.primary_color,
+          set: (value) => {
+            config.primary_color = value;
+            window.elementSdk.setConfig({ primary_color: value });
+          }
+        },
+        {
+          get: () => config.text_color || defaultConfig.text_color,
+          set: (value) => {
+            config.text_color = value;
+            window.elementSdk.setConfig({ text_color: value });
+          }
+        }
+      ],
+      borderables: [],
+      fontEditable: undefined,
+      fontSizeable: undefined
+    };
+  }
+
+  function mapToEditPanelValues(config) {
+    return new Map([
+      ["product_title", config.product_title || defaultConfig.product_title],
+      ["color_section_title", config.color_section_title || defaultConfig.color_section_title],
+      ["size_section_title", config.size_section_title || defaultConfig.size_section_title]
+      // ĐÃ BỎ product_badge khỏi panel
+    ]);
+  }
+
+  if (window.elementSdk) {
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange,
+      mapToCapabilities,
+      mapToEditPanelValues
+    });
+    config = window.elementSdk.config;
+  }
+
+  onConfigChange(config);
+  // Chọn màu bằng swatch & đổi ảnh
+document.querySelectorAll('.color-swatch').forEach(swatch => {
+  swatch.addEventListener('click', function () {
+
+    // Bỏ selected khỏi tất cả
+    document.querySelectorAll('.color-swatch').forEach(s => {
+      s.classList.remove('selected');
+      s.style.borderColor = "#d1d5db"; // gray-300
+    });
+
+    // Thêm selected cho swatch được chọn
+    this.classList.add('selected');
+    this.style.borderColor = "#3b82f6"; // blue-500
+
+    // Đổi ảnh chính
+    const newImg = this.getAttribute('data-image');
+    const mainImage = document.getElementById("mainImage");
+
+    if (newImg && mainImage) {
+      mainImage.src = newImg;
+    }
+  });
+});
+// Xử lý khi bấm nút "Mua hàng"
+const buyButton = document.getElementById('buyButton');
+const orderMessage = document.getElementById('orderMessage');
+
+if (buyButton && orderMessage) {
+  buyButton.addEventListener('click', () => {
+    orderMessage.textContent = "Xác nhận đơn hàng thành công";
+    orderMessage.classList.remove('hidden');
+  });
+}
+
+</script>
+</body>
+</html>

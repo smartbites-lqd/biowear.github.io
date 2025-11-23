@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yêu cầu mẫu</title>
+  <link rel="icon" type="image/png" href="logo-biowear.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    .product-image-frame {
+      aspect-ratio: 14 / 18;
+      width: 100%;
+      background: #f3f4f6;
+      border: 2px dashed #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .placeholder-text {
+      color: #9ca3af;
+      font-size: 0.875rem;
+      text-align: center;
+      padding: 1rem;
+    }
+    
+    .color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .color-swatch:hover {
+      transform: scale(1.15);
+    }
+    
+    .color-swatch.selected {
+      border-color: #000;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+    }
+    .product-image-frame {
+  position: relative;
+  width: 100%;
+  padding-top: calc(18 / 14 * 100%); /* giữ đúng khung 14×18 */
+  background-color: #f3f4f6;
+  overflow: hidden;
+}
+
+.product-main-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* hiệu ứng đẩy ra bên trái */
+.product-main-img.slide-out {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
+/* trạng thái bắt đầu của ảnh mới (bên phải, mờ) */
+.product-main-img.slide-in {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+/* optional: border cho màu đang chọn */
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.color-swatch.selected {
+  border-color: #111827;
+}
+
+  </style>
+</head>
+<body>
+  <nav class="bg-white border-gray-200 py-4 shadow-sm dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
+
+        <!-- LOGO + Tên thương hiệu -->
+        <a href="#" class="flex items-center space-x-3">
+            <img src="logo-biowear.jpg" class="h-10 sm:h-12" alt="Biowear Logo">
+            <span class="self-center text-2xl font-bold whitespace-nowrap dark:text-white">
+                Biowear
+            </span>
+        </a>
+
+        <!-- Nút yêu cầu mẫu & Menu mobile -->
+        <div class="flex items-center lg:order-2">
+            <a href="yeu-cau-mau.html"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
+                       font-semibold rounded-lg text-base px-6 py-3 mr-2 dark:bg-blue-600 
+                       dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Yêu cầu mẫu
+            </a>
+
+            <button data-collapse-toggle="mobile-menu-2" type="button"
+                class="inline-flex items-center p-3 ml-1 text-gray-600 rounded-lg lg:hidden hover:bg-gray-100 
+                       focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 
+                       dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="mobile-menu-2" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- MENU ITEMS -->
+        <div class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1 hidden" id="mobile-menu-2">
+            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-10 lg:mt-0 text-lg">
+
+                <li>
+                    <a href="index.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="product.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Sản phẩm
+                    </a>
+                </li>
+
+                <li>
+                    <a href="khuyen-mai.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Khuyến mãi
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-sky-50 to-lime-50 flex items-center justify-center p-4">
+  
+  <div class="w-full max-w-5xl mx-auto relative">
+
+    <!-- THÔNG BÁO -->
+    <div id="successMessage"
+         class="hidden absolute top-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded-full shadow-lg text-sm font-semibold opacity-0 transition-opacity duration-500">
+      Gửi yêu cầu thành công!
+    </div>
+
+    <div class="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border border-emerald-100">
+
+      <div class="grid md:grid-cols-2 gap-0">
+
+        <!-- Bên trái -->
+        <div class="p-8 md:p-10 bg-gradient-to-br from-emerald-500 via-teal-500 to-sky-500 text-white">
+          <h1 class="text-3xl font-extrabold mb-4">Yêu cầu thiết kế sản phẩm Biowear</h1>
+          <p class="text-emerald-50/90 text-sm mb-4">
+            Gửi yêu cầu thiết kế riêng cho Biotee, BioCoat và BioFit.
+          </p>
+
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="mt-1 w-2 h-2 bg-white rounded-full"></span>
+              Chọn size (M, L, XL, XXL).
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 w-2 h-2 bg-white rounded-full"></span>
+              Nhập mã màu (#XXXXXX hoặc mô tả).
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 w-2 h-2 bg-white rounded-full"></span>
+              Ghi mô tả chi tiết họa tiết.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Form -->
+        <div class="p-6 md:p-8">
+          <h2 class="text-xl font-bold mb-4 text-gray-800">Form gửi yêu cầu thiết kế</h2>
+
+          <form id="designForm" class="space-y-4">
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium">Họ và tên *</label>
+                <input type="text" required class="w-full rounded-xl border-gray-300 px-3 py-2" placeholder="Nguyễn Văn A">
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Số điện thoại *</label>
+                <input type="tel" required class="w-full rounded-xl border-gray-300 px-3 py-2" placeholder="09xx xxx xxx">
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium">Email</label>
+                <input type="email" class="w-full rounded-xl border-gray-300 px-3 py-2" placeholder="you@example.com">
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Số lượng *</label>
+                <input type="number" min="1" required class="w-full rounded-xl border-gray-300 px-3 py-2" placeholder="Ví dụ: 20">
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium">Loại sản phẩm *</label>
+                <select required class="w-full rounded-xl border-gray-300 px-3 py-2">
+                  <option value="">Chọn sản phẩm</option>
+                  <option>Biotee</option>
+                  <option>BioCoat</option>
+                  <option>BioFit</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-sm font-medium">Size *</label>
+                <select required class="w-full rounded-xl border-gray-300 px-3 py-2">
+                  <option value="">Chọn size</option>
+                  <option>M</option>
+                  <option>L</option>
+                  <option>XL</option>
+                  <option>XXL</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium">Mã màu *</label>
+                <input type="text" required class="w-full rounded-xl border-gray-300 px-3 py-2" placeholder="#50977F hoặc mô tả">
+              </div>
+
+            </div>
+
+            <div>
+              <label class="text-sm font-medium">Họa tiết / Mô tả *</label>
+              <textarea required rows="4" class="w-full rounded-xl border-gray-300 px-3 py-2" placeholder="Ví dụ: in logo trước ngực, họa tiết sau lưng..."></textarea>
+            </div>
+
+            <div>
+              <label class="text-sm font-medium">Ghi chú thêm</label>
+              <textarea rows="3" class="w-full rounded-xl border-gray-300 px-3 py-2"></textarea>
+            </div>
+
+            <div class="flex justify-end">
+              <button id="submitBtn" type="submit"
+                class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition-all duration-300">
+                <span id="btnText">Gửi yêu cầu thiết kế</span>
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+document.getElementById("designForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const btn = document.getElementById("submitBtn");
+  const btnText = document.getElementById("btnText");
+
+  // Đổi màu nút thành hồng
+  btn.classList.remove("bg-emerald-600", "hover:bg-emerald-700");
+  btn.classList.add("bg-pink-500", "hover:bg-pink-600");
+
+  // Hiện dấu tick + đổi nội dung
+  btn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414l2.543 2.543 6.543-6.543a1 1 0 011.414 0z" clip-rule="evenodd" />
+    </svg>
+    Gửi yêu cầu thành công
+  `;
+
+  // Vô hiệu hóa nút
+  btn.disabled = true;
+  btn.classList.add("cursor-not-allowed", "opacity-80");
+});
+</script>
+
+
+</body>
+</html>

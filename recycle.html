@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đổi áo cũ</title>
+  <link rel="icon" type="image/png" href="logo-biowear.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    .product-image-frame {
+      aspect-ratio: 14 / 18;
+      width: 100%;
+      background: #f3f4f6;
+      border: 2px dashed #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .placeholder-text {
+      color: #9ca3af;
+      font-size: 0.875rem;
+      text-align: center;
+      padding: 1rem;
+    }
+    
+    .color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .color-swatch:hover {
+      transform: scale(1.15);
+    }
+    
+    .color-swatch.selected {
+      border-color: #000;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+    }
+    .product-image-frame {
+  position: relative;
+  width: 100%;
+  padding-top: calc(18 / 14 * 100%); /* giữ đúng khung 14×18 */
+  background-color: #f3f4f6;
+  overflow: hidden;
+}
+
+.product-main-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* hiệu ứng đẩy ra bên trái */
+.product-main-img.slide-out {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
+/* trạng thái bắt đầu của ảnh mới (bên phải, mờ) */
+.product-main-img.slide-in {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+/* optional: border cho màu đang chọn */
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.color-swatch.selected {
+  border-color: #111827;
+}
+
+  </style>
+</head>
+<body>
+  <nav class="bg-white border-gray-200 py-4 shadow-sm dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
+
+        <!-- LOGO + Tên thương hiệu -->
+        <a href="#" class="flex items-center space-x-3">
+            <img src="logo-biowear.jpg" class="h-10 sm:h-12" alt="Biowear Logo">
+            <span class="self-center text-2xl font-bold whitespace-nowrap dark:text-white">
+                Biowear
+            </span>
+        </a>
+
+        <!-- Nút yêu cầu mẫu & Menu mobile -->
+        <div class="flex items-center lg:order-2">
+            <a href="yeu-cau-mau.html"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 
+                       font-semibold rounded-lg text-base px-6 py-3 mr-2 dark:bg-blue-600 
+                       dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Yêu cầu mẫu
+            </a>
+
+            <button data-collapse-toggle="mobile-menu-2" type="button"
+                class="inline-flex items-center p-3 ml-1 text-gray-600 rounded-lg lg:hidden hover:bg-gray-100 
+                       focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 
+                       dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="mobile-menu-2" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- MENU ITEMS -->
+        <div class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1 hidden" id="mobile-menu-2">
+            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-10 lg:mt-0 text-lg">
+
+                <li>
+                    <a href="index.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Trang chủ
+                    </a>
+                </li>
+
+                <li>
+                    <a href="product.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Sản phẩm
+                    </a>
+                </li>
+
+                <li>
+                    <a href="khuyen-mai.html"
+                        class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0 dark:text-gray-300">
+                        Khuyến mãi
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-4 py-10 md:py-16">
+  <div class="grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-4">
+        🌿 Chương trình tái sinh tủ đồ
+      </span>
+
+      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+        ĐỔI ÁO CŨ – NHẬN ƯU ĐÃI XANH
+      </h1>
+
+      <p class="text-lg font-medium text-emerald-700 mb-3">
+        Cùng Biowear xây dựng vòng tuần hoàn thời trang bền vững
+      </p>
+
+      <p class="text-gray-700 mb-3">
+        Thời trang không chỉ là phong cách — mà còn là trách nhiệm với Trái Đất.
+        Chương trình <b>“Đổi áo cũ – Nhận ưu đãi xanh”</b> dành cho khách hàng mong muốn bắt đầu lối sống xanh.
+      </p>
+
+      <p class="text-gray-700 mb-6">
+        Mang áo Biowear đã qua sử dụng đến cửa hàng bất kỳ để nhận <b class="text-emerald-700">ưu đãi lên đến 30%</b>.
+      </p>
+
+      <div class="flex gap-3 flex-wrap">
+        <a href="#steps"
+          class="px-5 py-3 rounded-full text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-700 shadow-md">
+          Bắt đầu đổi áo
+        </a>
+        <a href="#offers"
+          class="px-5 py-3 rounded-full text-sm font-semibold border border-emerald-300 text-emerald-700 bg-white hover:bg-emerald-50">
+          Xem ưu đãi
+        </a>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-emerald-50">
+      <h2 class="text-xl font-bold mb-4 text-gray-900">Vì sao nên tham gia?</h2>
+      <ul class="space-y-3 text-sm text-gray-700">
+        <li class="flex gap-3"><span>♻️</span> Giảm rác thải thời trang</li>
+        <li class="flex gap-3"><span>🌍</span> Bảo vệ hệ sinh thái</li>
+        <li class="flex gap-3"><span>👕</span> Tăng vòng đời sản phẩm</li>
+        <li class="flex gap-3"><span>💚</span> Nhận ưu đãi thực tế</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VÌ SAO -->
+<section class="max-w-6xl mx-auto px-4 mt-12">
+  <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">
+    🌱 Vì sao Biowear triển khai chương trình này?
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-2xl shadow border border-emerald-50">
+      <div class="text-3xl mb-3">♻️</div>
+      <h3 class="font-semibold mb-2">Giảm rác thải thời trang</h3>
+      <p class="text-sm">Tái chế – tái sử dụng giúp giảm gánh nặng lên môi trường.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow border border-emerald-50">
+      <div class="text-3xl mb-3">🌍</div>
+      <h3 class="font-semibold mb-2">Bảo vệ hệ sinh thái</h3>
+      <p class="text-sm">Giảm khai thác tài nguyên thô bằng cách tái chế chất liệu cũ.</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow border border-emerald-50">
+      <div class="text-3xl mb-3">👕</div>
+      <h3 class="font-semibold mb-2">Tăng vòng đời sản phẩm</h3>
+      <ul class="list-disc list-inside text-sm space-y-1">
+        <li>Tái sử dụng nếu còn tốt</li>
+        <li>Tái chế thành sợi</li>
+        <li>Xử lý an toàn nếu hư hỏng nặng</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ƯU ĐÃI -->
+<section id="offers" class="max-w-6xl mx-auto px-4 mt-16">
+  <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">🎁 Ưu đãi bạn nhận được</h2>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-2xl shadow text-center border border-emerald-100">
+      <div class="text-3xl mb-2">1️⃣</div>
+      <div class="text-2xl font-extrabold text-emerald-600 mb-1">15%</div>
+      <p class="text-sm">Giảm khi đổi 1 áo</p>
+    </div>
+
+    <div class="bg-emerald-600 text-white p-6 rounded-2xl shadow text-center border border-emerald-700">
+      <div class="text-3xl mb-2">2️⃣</div>
+      <div class="text-2xl font-extrabold mb-1">25%</div>
+      <p class="text-sm">Giảm khi đổi 2 áo</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow text-center border border-emerald-100">
+      <div class="text-3xl mb-2">3️⃣</div>
+      <div class="text-2xl font-extrabold text-emerald-700 mb-1">30%</div>
+      <p class="text-sm">Đổi từ 3 áo trở lên</p>
+    </div>
+  </div>
+
+  <p class="text-center text-sm text-gray-600 mt-4">
+    Áp dụng cho: <b>BioTee – BioCoat – BioFlex – BioAccessories</b>.
+  </p>
+</section>
+
+<!-- QUY TRÌNH -->
+<section id="steps" class="max-w-6xl mx-auto px-4 mt-16">
+  <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">🔄 Quy trình đổi áo</h2>
+
+  <div class="space-y-4">
+    <div class="flex gap-4 bg-white p-5 rounded-2xl shadow border border-emerald-50">
+      <div class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center">1</div>
+      <div>
+        <h3 class="font-semibold mb-1">Mang áo Biowear đến cửa hàng</h3>
+        <p class="text-sm">Không cần hóa đơn – miễn là áo Biowear chính hãng.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-4 bg-white p-5 rounded-2xl shadow border border-emerald-50">
+      <div class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center">2</div>
+      <div>
+        <h3 class="font-semibold mb-1">Nhân viên kiểm tra & phân loại</h3>
+        <p class="text-sm">Tất cả tình trạng đều được nhận.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-4 bg-white p-5 rounded-2xl shadow border border-emerald-50">
+      <div class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center">3</div>
+      <div>
+        <h3 class="font-semibold mb-1">Nhận ưu đãi xanh</h3>
+        <p class="text-sm">Áp dụng ngay lập tức vào hóa đơn.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-4 bg-white p-5 rounded-2xl shadow border border-emerald-50">
+      <div class="w-9 h-9 rounded-full bg-emerald-600 text-white flex items-center justify-center">4</div>
+      <div>
+        <h3 class="font-semibold mb-1">Biowear xử lý theo quy trình xanh</h3>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>Tái chế thành sợi</li>
+          <li>Sản xuất vật liệu mới</li>
+          <li>Tái sử dụng cho dự án cộng đồng</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
